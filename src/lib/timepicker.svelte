@@ -1,8 +1,9 @@
 <script lang="ts">
     import { fade, slide } from "svelte/transition";
+    import type { Timeframe } from "./date-utils";
 
-    const options = ["1d", "1w", "1m", "6m"];
-    let { selected = $bindable() } = $props();
+    const options: Timeframe[] = ["1D", "1W", "1M", "6M"];
+    let { selected = $bindable() }: { selected: Timeframe } = $props();
 </script>
 
 <div class="flex gap-3 bg-stone-50 dark:bg-stone-600 p-1 rounded-2xl shadow-sm">
