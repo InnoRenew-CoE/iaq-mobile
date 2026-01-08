@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@theme {
+    --font-departure: "departure-mono";
+
+    --color-primary: #000;
+    --color-accent: red;
+}
+
+@font-face {
+    font-family: "departure-mono";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src:
+        url("/fonts/DepartureMono/DepartureMono-Regular.woff2") format("woff2"),
+        url("/fonts/DepartureMono/DepartureMono-Regular.woff") format("woff");
+    font-named-instance: "Regular";
+}
