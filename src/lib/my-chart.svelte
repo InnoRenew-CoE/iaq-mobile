@@ -1,71 +1,41 @@
 <script lang="ts">
-    import { Chart, registerables } from "chart.js";
+    import { Chart, registerables, type TimeUnit } from "chart.js";
+    import "chartjs-adapter-date-fns";
     import { onDestroy, onMount } from "svelte";
-    import { ChartUtils, type Timeframe } from "./date-utils";
+    import { type Timeframe } from "./date-utils";
 
+    let { timeframe = $bindable("1D"), data }: { timeframe: Timeframe; data: { value: any; time: string }[] | undefined } = $props();
     Chart.register(...registerables);
 
-    export let timeframe: Timeframe = "1W";
-
     let canvas: HTMLCanvasElement;
-    let chart: Chart | null = null;
+    let chart: any | null = null;
+
+    const unitMap: Record<Timeframe, string> = {
+        "1D": "hour",
+        "1W": "day",
+        "1M": "week",
+        "6M": "month",
+    };
 
     function createChart() {
         if (chart) {
             chart.destroy();
         }
 
-        const labels = ChartUtils.generateDates(timeframe);
-        const data = [
-            {
-                sensor_id: "444",
-                fields: {
-                    CO2: [
-                        {
-                            time: "2026-01-07T16:00:00Z",
-                            value: 832.15,
-                        },
-                        {
-                            time: "2026-01-07T16:05:00Z",
-                            value: 831.3,
-                        },
-                        {
-                            time: "2026-01-07T16:05:00Z",
-                            value: 830.84,
-                        },
-                        {
-                            time: "2026-01-07T16:05:00Z",
-                            value: 830.86,
-                        },
-                        {
-                            time: "2026-01-07T16:05:00Z",
-                            value: 830.01,
-                        },
-                        {
-                            time: "2026-01-07T16:05:00Z",
-                            value: 829.61,
-                        },
-                        {
-                            time: "2026-01-07T16:10:00Z",
-                            value: 829.89,
-                        },
-                    ],
-                },
-            },
-        ];
+        if (!data) return;
 
         chart = new Chart(canvas, {
             type: "line",
             data: {
-                labels: labels,
+                // labels: labels,
                 datasets: [
                     {
                         label: "CO2",
-                        data: data[0].fields.CO2.map((x) => x.value),
-                        // parsing: {
-                        // xAxisKey: "time",
-                        // yAxisKey: "value",
-                        // },
+                        data: data.map((d) => ({ ...d, time: new Date(d.time) })),
+                        parsing: {
+                            xAxisKey: "time",
+                            yAxisKey: "value",
+                        },
 
                         borderColor: "#ff00ff",
                         borderWidth: 2,
@@ -91,6 +61,18 @@
                     y: {
                         beginAtZero: false,
                     },
+                    x: {
+                        type: "time",
+                        time: {
+                            unit: unitMap[timeframe] as TimeUnit,
+                            tooltipFormat: "dd MMM yyyy HH:mm",
+                            displayFormats: {
+                                minute: "HH:mm",
+                                hour: "HH:mm",
+                                day: "dd MMM",
+                            },
+                        },
+                    },
                 },
             },
         });
@@ -107,9 +89,11 @@
     });
 
     // Recreate chart when timeframe changes
-    $: if (canvas && timeframe) {
-        createChart();
-    }
+    $effect(() => {
+        if (timeframe) {
+            createChart();
+        }
+    });
 </script>
 
 <div class="chart-container">

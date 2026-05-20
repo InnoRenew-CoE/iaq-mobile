@@ -1,31 +1,29 @@
 <script lang="ts">
-    import { ChartUtils, type Timeframe } from "$lib/date-utils";
+    import { type Timeframe } from "$lib/date-utils";
     import MyChart from "$lib/my-chart.svelte";
     import Timepicker from "$lib/timepicker.svelte";
     import { onMount } from "svelte";
 
     let selected: Timeframe = $state("1D");
 
-    const labels = ChartUtils.generateDates(selected);
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: "My First Dataset",
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1,
-            },
-        ],
-    };
-
-    onMount(() => {
-        const config = {
-            type: "line",
-            data: data,
-        };
+    let chartData = $state(undefined);
+    // F8B3B7C6A138
+    onMount(async () => {
         // const chart = new Chart(ctx, config);
+        await fetchData();
+    });
+
+    async function fetchData() {
+        console.log(`https://data.iaq.innorenew.eu/citizens_science/api.php?id=F8:B3:B7:C6:1A:38&time=${selected}`);
+        const data = await fetch(`https://data.iaq.innorenew.eu/citizens_science/api.php?id=F8:B3:B7:C6:1A:38&time=${selected}`);
+        chartData = await data.json();
+        console.log(chartData["CO2"].map((x) => x.time));
+    }
+
+    $effect(() => {
+        if (selected) {
+            fetchData();
+        }
     });
 </script>
 
@@ -37,12 +35,14 @@
 </div>
 
 <div class="grid gap-5 px-5">
-    {#each { length: 5 } as _}
-        <section id="x" class="min-h-25">
-            <div class="font-departure text-sm">CO2 [ppm]</div>
-            <div>
-                <MyChart timeframe={selected} />
-            </div>
-        </section>
-    {/each}
+    {#if chartData}
+        {#each Object.keys(chartData).filter((x) => x !== "uptime") as key, i (key)}
+            <section id="x" class="min-h-25">
+                <div class="font-departure text-sm capitalize">{key.replaceAll(/[^a-zA-Z0-9]/gi, " ")}</div>
+                <div>
+                    <MyChart timeframe={selected} data={chartData[key]} />
+                </div>
+            </section>
+        {/each}
+    {/if}
 </div>
