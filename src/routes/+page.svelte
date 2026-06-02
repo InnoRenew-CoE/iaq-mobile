@@ -1,23 +1,35 @@
 <div class="px-10">
-    <div class="flex items-center flex-col">
-        <div class="p-10 font-bold text-xl font-sans">Air Quality Sensor</div>
-    </div>
-    <div class="grid gap-10">
-        <section>
-            <div class="text-lg font-bold font-departure">About</div>
-            <div>blah blah</div>
+    <section class="max-w-4xl mx-auto px-6 py-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Air Quality Sensor</h1>
+        <div>
+            <span>Read the user manual here:</span>
+            <a class="text-indigo-400 font-light text-sm" href="https://sensing.innorenew.eu/#resources">User manual</a>
+        </div>
+
+        <section class="max-w-4xl mx-auto px-6 py-8">
+            <div class="space-y-6">
+                <div class="border border-gray-200 rounded-xl p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-3">About</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        The About tab provides information about the project, its objectives, and how the indoor air quality sensor is used to monitor environmental conditions. Here you can learn more about the collected measurements and the purpose of the monitoring campaign.
+                    </p>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-3">Home</h2>
+                    <p class="text-gray-600 leading-relaxed">The Home tab is this page. It contains useful information about your sensor and provides links to the other sections of the platform, including project information, sensor data, and the feedback form.</p>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-3">Data</h2>
+                    <p class="text-gray-600 leading-relaxed">The Data tab displays measurements collected by the sensor. Interactive charts and tables allow you to explore indoor air quality data and track environmental conditions over time.</p>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-3">Form</h2>
+                    <p class="text-gray-600 leading-relaxed">The Form tab allows you to provide feedback about your experience with the sensor and the platform. Your responses help us improve the project and better understand user experiences.</p>
+                </div>
+            </div>
         </section>
-        <section>
-            <div class="text-lg font-bold font-departure">Home</div>
-            <div>blah blah</div>
-        </section>
-        <section>
-            <div class="text-lg font-bold font-departure">Data</div>
-            <div>blah blah</div>
-        </section>
-        <section>
-            <div class="text-lg font-bold font-departure">Form</div>
-            <div>blah blah</div>
-        </section>
-    </div>
+    </section>
 </div>

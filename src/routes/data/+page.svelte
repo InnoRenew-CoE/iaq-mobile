@@ -1,12 +1,13 @@
 <script lang="ts">
     import { type Timeframe } from "$lib/date-utils";
     import MyChart from "$lib/my-chart.svelte";
+    import { getToken } from "$lib/stores/user";
     import Timepicker from "$lib/timepicker.svelte";
     import { onMount } from "svelte";
 
     let selected: Timeframe = $state("1D");
 
-    let chartData = $state(undefined);
+    let chartData: any | undefined = $state(undefined);
     // F8B3B7C6A138
     onMount(async () => {
         // const chart = new Chart(ctx, config);
@@ -14,10 +15,11 @@
     });
 
     async function fetchData() {
-        console.log(`https://data.iaq.innorenew.eu/citizens_science/api.php?id=F8:B3:B7:C6:1A:38&time=${selected}`);
-        const data = await fetch(`https://data.iaq.innorenew.eu/citizens_science/api.php?id=F8:B3:B7:C6:1A:38&time=${selected}`);
+        const token = getToken();
+        const url = `https://data.iaq.innorenew.eu/citizens_science/api.php?id=${token}&time=${selected}`;
+        const data = await fetch(url);
+        if (!token) alert("Missing token data");
         chartData = await data.json();
-        console.log(chartData["CO2"].map((x) => x.time));
     }
 
     $effect(() => {
@@ -35,7 +37,7 @@
 </div>
 
 <div class="grid gap-5 px-5">
-    {#if chartData}
+    {#if chartData && getToken()}
         {#each Object.keys(chartData).filter((x) => x !== "uptime") as key, i (key)}
             <section id="x" class="min-h-25">
                 <div class="font-departure text-sm capitalize">{key.replaceAll(/[^a-zA-Z0-9]/gi, " ")}</div>
@@ -44,5 +46,7 @@
                 </div>
             </section>
         {/each}
+    {:else}
+        <div>No data available</div>
     {/if}
 </div>
