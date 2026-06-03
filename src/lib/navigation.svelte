@@ -5,7 +5,7 @@
     const buttons = [
         { icon: "./home.svg", title: "Home", path: "/" },
         { icon: "./nav-chart.svg", title: "Data", path: "/data" },
-        { icon: "./feedback.svg", title: "Form", path: "/form" },
+        // { icon: "./feedback.svg", title: "Form", path: "/form" },
         // { icon: "./nav-chart.svg", title: "Data", path: "/data" },
     ];
 </script>
