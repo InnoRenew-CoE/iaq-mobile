@@ -18,6 +18,7 @@
         const token = getToken();
         const url = `https://data.iaq.innorenew.eu/citizens_science/api.php?id=${token}&time=${selected}`;
         const data = await fetch(url);
+        // console.log(await data.text());
         if (!token) alert("Missing token data");
         chartData = await data.json();
     }
@@ -37,7 +38,7 @@
 </div>
 
 <div class="grid gap-5 px-5">
-    {#if chartData && getToken()}
+    {#if chartData && getToken() && JSON.stringify(chartData) !== "[]"}
         {#each Object.keys(chartData).filter((x) => x !== "uptime") as key, i (key)}
             <section id="x" class="min-h-25">
                 <div class="font-departure text-sm capitalize">{key.replaceAll(/[^a-zA-Z0-9]/gi, " ")}</div>
@@ -47,6 +48,6 @@
             </section>
         {/each}
     {:else}
-        <div>No data available</div>
+        <div class="flex items-center justify-center opacity-40">No data available</div>
     {/if}
 </div>

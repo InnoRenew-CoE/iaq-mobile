@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<div class="min-h-screen bg-stone-100 dark:bg-stone-800 dark:text-white pb-30">
+<div class="min-h-screen bg-stone-100 pb-30">
     {#if !$tokenStore}
         <div class="p-20 text-center h-screen flex items-center justify-center">Please scan the QR code you were provided with</div>
     {:else}

@@ -6,7 +6,7 @@
     let { selected = $bindable() }: { selected: Timeframe } = $props();
 </script>
 
-<div class="flex gap-3 bg-stone-50 dark:bg-stone-600 p-1 rounded-2xl shadow-sm">
+<div class="flex gap-3 bg-stone-50 p-1 rounded-2xl shadow-sm">
     {#each options as option}
         {@const isSelected = option === selected}
         <div
@@ -15,7 +15,7 @@
             }}
             in:slide
             out:fade
-            class="uppercase text-sm p-2 rounded-xl {isSelected ? 'bg-white dark:bg-stone-500 shadow-sm ' : ''}"
+            class="uppercase text-sm p-2 rounded-xl {isSelected ? 'bg-white shadow-sm ' : ''}"
         >
             {option}
         </div>
