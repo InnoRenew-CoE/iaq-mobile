@@ -4,7 +4,7 @@
     import { onDestroy, onMount } from "svelte";
     import { type Timeframe } from "./date-utils";
 
-    let { timeframe = $bindable("1D"), data }: { timeframe: Timeframe; data: { value: any; time: string }[] | undefined } = $props();
+    let { timeframe = $bindable("1D"), label = "CO2", data }: { timeframe: Timeframe; label: string; data: { value: any; time: string }[] | undefined } = $props();
     Chart.register(...registerables);
 
     let canvas: HTMLCanvasElement;
@@ -30,7 +30,7 @@
                 // labels: labels,
                 datasets: [
                     {
-                        label: "CO2",
+                        label: label,
                         data: data.map((d) => ({ ...d, time: new Date(d.time) })),
                         parsing: {
                             xAxisKey: "time",

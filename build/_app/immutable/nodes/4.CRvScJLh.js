@@ -1,1 +1,0 @@
-import"../chunks/DsnmJJEf.js";import"../chunks/B88nowaC.js";import{J as o,ab as r}from"../chunks/CZAmNDYH.js";var a=r('<div class="opacity-40 text-xs flex items-center justify-center h-screen">No data provided</div>');function m(t){var e=a();o(t,e)}export{m as component};

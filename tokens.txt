@@ -27,5 +27,5 @@ https://model.iaq.innorenew.eu/?token=F8:B3:B7:C6:CE:00
 https://model.iaq.innorenew.eu/?token=78:42:1C:77:16:60
 
 
-https://buildwell.innorenew.eu/?token=F8:B3:B7:C6:18:C0
-https://buildwell.innorenew.eu/?token=38:18:2B:33:86:88
+https://buildwell.iaq.innorenew.eu/?token=F8:B3:B7:C6:18:C0
+https://buildwell.iaq.innorenew.eu/?token=38:18:2B:33:86:88
