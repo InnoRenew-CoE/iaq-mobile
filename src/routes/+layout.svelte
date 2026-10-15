@@ -3,12 +3,14 @@
     import { page } from "$app/state";
     import favicon from "$lib/assets/favicon.svg";
     import Navigation from "$lib/navigation.svelte";
-    import { getToken, saveToken, tokenStore } from "$lib/stores/user";
+    import { getLanguage, getToken, saveToken, tokenStore } from "$lib/stores/user";
     import { onMount } from "svelte";
     import "../app.css";
 
     let { children } = $props();
+
     onMount(async () => {
+        getLanguage();
         getToken();
         const token = page.url.searchParams.get("token");
         if (token) {

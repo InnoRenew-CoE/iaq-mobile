@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from "$app/state";
+    import { getLanguage, saveLanguage, selectedLanguage } from "./stores/user";
     import SvgIcon from "./svg-icon.svelte";
 
     const buttons = [
@@ -21,5 +22,8 @@
                 </li>
             </a>
         {/each}
+        <button onclick={() => saveLanguage(getLanguage() === "english" ? "slovenian" : "english")}>
+            <img class="" src="/{$selectedLanguage === 'english' ? 'slovenia' : 'english'}.svg" alt="Slovenian" width="24" />
+        </button>
     </ul>
 </div>
