@@ -1,0 +1,1 @@
+import{C as n,aj as u}from"./CeDkyWFF.js";function f(t,r,i){var s=t==null?"":""+t;return r&&(s=s?s+" "+r:r),s===""?null:s}function p(t,r){return t==null?null:String(t)}function A(t,r,i,s,a,c){var l=t[n];if(u||l!==i||l===void 0){var e=f(i,s);(!u||e!==t.getAttribute("class"))&&(e==null?t.removeAttribute("class"):t.className=e),t[n]=i}return c}export{A as s,p as t};
